@@ -39,7 +39,7 @@ Bài được chỉnh theo đúng phạm vi tài liệu đã cung cấp: Python/
 
 ## GitHub
 
-Kho công khai: [Project3-Insurance-Claim](https://github.com/duyta848-sys/Project3-Insurance-Claim).
+Kho công khai: [Project3-Insurance-Claim](https://github.com/duyta848-sys/Project3-Insurance-Claim). Kho lưu báo cáo PDF, notebook, mã phân tích, dữ liệu và các bảng/hình của bài.
 
 ## Nguồn
 
