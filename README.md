@@ -1,46 +1,64 @@
-# Project 3: Insurance Claim Dataset
+# Project 3 Insurance Claim Dataset
 
-Bài được chỉnh theo đúng phạm vi tài liệu đã cung cấp: Python/pandas cơ bản, làm sạch dữ liệu, thống kê nhóm, biểu đồ và bốn mô hình phân loại trong T14-T15.
+Bộ nộp Mid-Term 2 học phần Khoa học dữ liệu. Báo cáo, notebook, script, CSV và chín hình sử dụng cùng kết quả phân tích. Bìa được giữ nguyên để nhóm tự bổ sung.
 
-## Tệp chính
+Repository của nhóm: https://github.com/duyta848-sys/Project3-Insurance-Claim
+
+[Mở notebook trên Colab sau khi tải bộ file lên GitHub](https://colab.research.google.com/github/duyta848-sys/Project3-Insurance-Claim/blob/main/Project3_MidTerm2.ipynb)
+
+## Các tệp chính
 
 | Tệp | Nội dung |
 |---|---|
-| Project3_Bao_cao_Insurance_Claim.pdf | Báo cáo 14 trang, bốn giai đoạn, 8 hình có số liệu và diễn giải |
-| Project3_Insurance_Claim.ipynb | 26 ô, gồm 13 ô mã đã chạy tuần tự không lỗi |
-| analysis.py | Mã phân tích xuất từ đúng các ô mã notebook |
-| Insurance.csv | Dữ liệu gốc giữ nguyên từ archive.zip |
-| Insurance_clean.csv | Dữ liệu sau khi bỏ một bản sao, còn 1.337 dòng |
-| Bang_*.csv; Bang_nhom_*.csv | Các bảng số liệu để kiểm chứng nhận định |
-| Ma_tran_*.csv | Bốn ma trận nhầm lẫn |
-| Hinh_01 đến Hinh_08 | Tám hình được dùng trong báo cáo |
-| Doi_chieu_tai_lieu.md | Bảng đối chiếu lệnh/phương pháp với Sources |
-| requirements.txt | Các thư viện dùng cho mã phân tích |
+| `Project3_MidTerm2_Report.pdf` | Báo cáo chính thức theo định dạng tiểu luận, chữ trong bảng màu đen. |
+| `Project3_MidTerm2_Report.docx` | Bản Word để chỉnh bìa và các thông tin nhóm. |
+| `Project3_MidTerm2_Report.md` | Bản nội dung để đối chiếu nhanh, có đường dẫn tới hình. |
+| `Project3_MidTerm2.ipynb` | Notebook 15 ô mã, mỗi ô có chú thích; mỗi hình có diễn giải số liệu. |
+| `analysis.py` | Mã phân tích tương đương notebook, đọc CSV cùng thư mục. |
+| `Insurance.csv` | Dữ liệu gốc gồm 1.338 dòng và 8 cột. |
+| `outputs/Insurance_clean.csv` | Dữ liệu sau khi bỏ đúng một dòng trùng, gồm 1.337 dòng và 8 cột gốc. |
+| `outputs/` | 28 tệp CSV và PNG được tạo từ cả notebook và script. |
+| `Doi_chieu_tai_lieu.md` | Đối chiếu thao tác chính với tài liệu đã cung cấp. |
+| `validation.json` | Kết quả kiểm tra thực thi, đối chiếu số liệu và đồng bộ bộ file. |
+| `MANIFEST.sha256` | Mã kiểm tra nội dung của từng tệp trong bộ nộp. |
 
 ## Chạy trên Colab
 
-1. Tải và mở Project3_Insurance_Claim.ipynb trong Google Colab.
-2. Trong bảng Files bên trái, dùng nút Upload để tải Insurance.csv vào thư mục làm việc. Giữ nguyên tên tệp. Cần tải lại CSV khi phiên Colab mới xóa dữ liệu tạm.
-3. Chọn Runtime > Run all. Không cần gắn Google Drive hoặc thêm lệnh tải dữ liệu.
-4. Kết quả hiện ngay trong notebook; các bảng CSV và hình PNG được tạo tại thư mục làm việc.
+1. Tải `Project3_MidTerm2.ipynb` lên Colab hoặc mở bằng liên kết phía trên sau khi tải lên GitHub.
+2. Chọn **Runtime → Run all**. Nên dùng một runtime mới để tránh giữ biến từ lần chạy cũ.
+3. Notebook chứa nguyên văn CSV gốc trong ô đọc dữ liệu, không cần Kaggle, Google Drive hoặc giải nén dữ liệu.
+4. Đọc phần phân tích ngay sau từng hình. Các bảng và hình được xuất vào thư mục làm việc của phiên Colab.
 
-Đã kiểm tra toàn bộ 13 ô mã chạy theo thứ tự trong Python với CSV được cung cấp, không lỗi. Chưa kiểm tra trực tiếp giao diện Colab. Notebook cần có Insurance.csv trong thư mục làm việc, như các ví dụ read_csv trong tài liệu lớp.
+Ô đọc dữ liệu dùng `StringIO` và `pd.read_csv`, dựa trên thao tác nhập dữ liệu đã có trong tài liệu. Có thể thay dòng đọc bằng URL raw của `Insurance.csv` nếu muốn đọc trực tiếp từ GitHub. Script `analysis.py` đọc `Insurance.csv` trong cùng thư mục và tạo cùng các bảng/hình.
 
-## Các quyết định trong bài
+## Tải lên GitHub bằng giao diện
 
-- Không có ô thiếu nên không điền mean/median chỉ để đủ bước xử lý.
-- Bỏ một bản sao trùng toàn bộ theo T8-T9; thiếu ID nên chưa xác nhận trùng người.
-- Dùng describe và boxplot để xem giá trị bất thường; không bổ sung phép tính ngưỡng xóa chưa được hướng dẫn.
-- Đối chiếu giả thuyết bằng thống kê mô tả trong mẫu. Đây không phải kiểm định suy luận; không có p-value hoặc kết luận ý nghĩa thống kê. Nếu giảng viên yêu cầu kiểm định chính thức, cần có tài liệu hướng dẫn tương ứng đã học.
-- Mô hình theo T15: train/test 80/20, random_state=42, stratify; one-hot theo T8-T9; đồng bộ cột với align theo ví dụ giá nhà; StandardScaler chỉ học trên train.
-- Đánh giá Accuracy, Precision, Recall với nhãn dương 1 và ma trận nhầm lẫn. Dùng đúng bộ tham số minh họa của T15, không tinh chỉnh sau khi xem test.
-- Không đưa charges vào đặc trưng vì chưa rõ thời điểm ghi nhận. Không tự gán đơn vị tiền, tên giới tính/vùng hay quan hệ nhân quả.
-- Không đưa mã tạo PDF vào bài nộp: công cụ dàn trang không phải phần kiến thức phân tích.
+1. Giải nén `Project3_MidTerm2_Full.zip`, mở thư mục `Project3_MidTerm2` bên trong.
+2. Mở repository của nhóm bằng tài khoản có quyền ghi. Với kho trống, chọn **uploading an existing file**; với kho đã có tệp, chọn **Add file → Upload files**.
+3. Tải các tệp và thư mục bên trong thư mục dự án lên, giữ notebook và PDF ở thư mục gốc. Chọn **Commit changes**.
+4. Mở lại notebook và PDF trong danh sách tệp, kiểm tra repository ở chế độ **Public** và liên kết Colab mở đúng notebook.
 
-## GitHub
+URL trong báo cáo trỏ tới kho công khai chính thức của nhóm. Các tệp trong kho gồm notebook, báo cáo PDF/Word, dữ liệu, mã phân tích và kết quả đồng bộ.
 
-Kho công khai: [Project3-Insurance-Claim](https://github.com/duyta848-sys/Project3-Insurance-Claim). Kho lưu báo cáo PDF, notebook, mã phân tích, dữ liệu và các bảng/hình của bài.
+## Kết quả chính
 
-## Nguồn
+- Dữ liệu gốc: 1.338 dòng, 8 cột, không có ô thiếu; bỏ một dòng trùng còn 1.337 dòng.
+- Nhãn 1: 782 dòng, chiếm 58,49%; nhãn 0: 555 dòng.
+- Tỷ lệ nhãn 1 của smoker=1 là 90,88%, của smoker=0 là 50,14%.
+- Train/test: 1.069/268 dòng, phân tầng, random_state=42.
+- Random Forest 10 cây: accuracy test 92,16%, precision nhãn 1 là 97,89%, recall nhãn 1 là 88,54%, ROC-AUC 0,9849.
+- Kết quả này thay cho các điểm số của phiên bản dùng kỹ thuật ngoài tài liệu. Không trộn điểm số cũ với bộ file hiện tại.
 
-Chỉ sử dụng Mid-term-2.pdf, archive.zip/Insurance.csv và các tài liệu được cung cấp trong Sources. URL bộ dữ liệu có sẵn trong đề: https://www.kaggle.com/datasets/yasserh/insurance-claim-dataset . Không tra cứu hoặc đưa thêm phương pháp từ nguồn ngoài.
+## Phạm vi phương pháp
+
+Phần giả thuyết đối chiếu các giả định với số liệu mô tả theo diễn đạt của đề, không khẳng định ý nghĩa thống kê bằng p-value. Mô hình sử dụng bốn thuật toán và tham số của bài thực hành tuần 15. Bước điền thiếu không áp dụng vì không có ô thiếu; ngoại lệ IQR được giữ vì chưa xác định là lỗi. charges không đưa vào mô hình chính vì chưa rõ thời điểm quan sát.
+
+## Kiểm tra thực thi
+
+Người học đã xác nhận kiểm tra trên Colab trước đợt đồng bộ này. Sau khi sửa phương pháp, toàn bộ 15 ô mã của bản mới đã được chạy liên tục trong một tiến trình Python mới, không có CSV bên ngoài. Script cũng được chạy riêng với CSV gốc; 28 bảng/hình được đối chiếu và giống hệt nhau. Đây là kiểm tra thực thi của bản mới, không phải tuyên bố đã điều khiển giao diện Colab của người học.
+
+Báo cáo Word/PDF và ZIP được cập nhật từ cùng bộ kết quả. Bìa không được chỉnh sửa trong đợt đồng bộ này.
+
+## Đường dẫn tương thích
+
+`Project3_Insurance_Claim.ipynb` là bản giống hệt notebook chính. `Project3_Bao_cao_Insurance_Claim.pdf` là bản giống hệt PDF chính; các đường dẫn đã chia sẻ trước đây tiếp tục mở đúng nội dung hiện tại.

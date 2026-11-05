@@ -1,9 +1,0 @@
-﻿,Kieu_du_lieu,So_o_thieu,Ty_le_thieu_pct
-age,int64,0,0.0
-sex,int64,0,0.0
-bmi,float64,0,0.0
-children,int64,0,0.0
-smoker,int64,0,0.0
-region,int64,0,0.0
-charges,float64,0,0.0
-insuranceclaim,int64,0,0.0

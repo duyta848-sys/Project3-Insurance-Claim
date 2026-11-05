@@ -1,27 +1,25 @@
-# Đối chiếu mã và phương pháp với tài liệu đã cung cấp
+# Đối chiếu phương pháp với tài liệu học phần
 
-Số ô dưới đây tính riêng các ô mã, theo thứ tự chạy 1-13.
+Chỉ số ô dưới đây bắt đầu từ 0 trong tệp bài giảng; số ô mã của notebook dự án bắt đầu từ 1. Các thao tác đã học được ghép lại để xử lý đúng bộ Insurance.csv.
 
-| Ô mã | Lệnh/phương pháp chính | Tài liệu và phần tham chiếu |
+| Thao tác trong dự án | Tài liệu đã cung cấp | Ô mã dự án |
 |---|---|---|
-| 1 | import pandas, NumPy, Matplotlib, Seaborn; read_csv, shape, head, info, describe | T6-T7 đọc CSV; T15 ô 4, 6-8 |
-| 2 | DataFrame, dtypes, isna, sum; value_counts, sort_index; so sánh số và to_csv | T8 mục phát hiện missing; T15 ô 33; T6 mục lưu CSV |
-| 3 | duplicated(keep=False), drop_duplicates, copy, mean | T8 mục trùng dữ liệu, ô 34-35; T9 Bài 2.1 |
-| 4 | describe, subplots, sns.boxplot, savefig | T12 trực quan hóa; Giới thiệu về Khoa học dữ liệu ô 56, 58; T15 subplots |
-| 5 | groupby, count, sum, mean; plot.bar | T10-T11 nhóm và tỷ trọng; Giới thiệu về Khoa học dữ liệu; T12 cột |
-| 6 | mean, median, min, max; sns.histplot | T8 và T15 describe/mean/median; T12 histogram; T15 ô 10 |
-| 7 | loc và điều kiện; groupby; biểu đồ cột và boxplot | T8 ví dụ loc; T10-T11; T12; Giới thiệu về Khoa học dữ liệu |
-| 8 | plot.bar, tỷ lệ theo nhóm | T12 phần đồ thị cột; T10 tỷ trọng |
-| 9 | groupby, mean/median; sns.scatterplot và sns.boxplot | T10; T12 scatter; Giới thiệu về Khoa học dữ liệu ô 56, 58, 63 |
-| 10 | loc và phép trừ, round, print để đối chiếu nhận định | Python cơ bản và T8 truy cập dữ liệu; không thêm kiểm định suy luận |
-| 11 | train_test_split, get_dummies, align, StandardScaler, fit_transform, transform | T15 ô 37; T8 ô 65; Giới thiệu về Khoa học dữ liệu ô 60, 63 |
-| 12 | LogisticRegression, KNeighborsClassifier, DecisionTreeClassifier, RandomForestClassifier; fit, predict; accuracy_score, precision_score, recall_score | T15 ô 39, 42; giữ nguyên bộ tham số minh họa; nhãn dương đổi thành 1 cho bài toán này |
-| 13 | confusion_matrix, sns.heatmap, enumerate, subplots, DataFrame, to_csv | T15 ô 39; bố cục đổi 2x2 cho dễ đọc, vẫn dùng cùng các lệnh vẽ |
+| `pd.read_csv` đọc CSV, đọc bằng URL | `T6_nhập_và_lưu_trữ_dữ_liệu_Python.ipynb`, ô 7-8; bản `6. Nhập_và_lưu_trữ_dữ_liệu_Python.ipynb` | 2 |
+| `StringIO` chuyển văn bản thành nguồn đọc | `T7_nhập_và_lưu_trữ_dữ_liệu.ipynb`, ô 24; kết hợp với `read_csv` của T6 để đọc CSV nguyên văn | 2 |
+| Xem kiểu dữ liệu, kiểm tra thiếu | `T8_Làm sạch và chuẩn bị dữ liệu.ipynb`, phần kiểm tra giá trị thiếu, ô 10 và 24-25 | 3 |
+| `duplicated`, `drop_duplicates` | `T8_Làm sạch và chuẩn bị dữ liệu.ipynb`, ô 35 | 3-4 |
+| Tứ phân vị, IQR, `describe` | `T8_Làm sạch và chuẩn bị dữ liệu.ipynb`, phần Robust Scaler, ô 45-47; bài thực hành tuần 15, ô 8 | 4-5 |
+| Chọn dòng bằng điều kiện và `loc` | `T10_Sắp xếp và biến đổi dữ liệu.ipynb`, ô 14, 20, 24; `T8_Làm sạch và chuẩn bị dữ liệu.ipynb`, ô 50 | 7 |
+| `groupby`, `count`, `sum`, `mean`, `agg` | `T10_Sắp xếp và biến đổi dữ liệu.ipynb`, ô 33-34, 92-93; `Giới thiệu về Khoa học dữ liệu.ipynb`, ô 43 | 7-9 |
+| Bar, histogram, scatter, boxplot, subplot | `Data_Viz_KHDL.ipynb`; `T12_Trực quan hoá dữ liệu.ipynb`; `T13_Trực quan hoá dữ liệu.ipynb`; `Giới thiệu về Khoa học dữ liệu.ipynb`, ô 45, 56, 58, 63 | 4-10 |
+| One-hot với `pd.get_dummies` | `T9_Làm sạch và chuẩn bị dữ liệu.ipynb`, ô 38; `T8_Làm sạch và chuẩn bị dữ liệu.ipynb`, ô 65 | 11 |
+| Chia train/test có phân tầng | `T15_Thực hành các mô hình học máy có giám sát.ipynb`, ô 16 và 37 | 11 |
+| Fit StandardScaler trên train, transform test | `T15_Thực hành các mô hình học máy có giám sát.ipynb`, ô 18 | 11 |
+| Logistic Regression, KNN k=5, Decision Tree sâu 3, Random Forest 10 cây | `T15_Thực hành các mô hình học máy có giám sát.ipynb`, ô 39 | 12 |
+| Accuracy, precision, recall, confusion matrix | `T15_Thực hành các mô hình học máy có giám sát.ipynb`, ô 39 | 12-13 |
+| ROC, AUC, so sánh các mô hình trên cùng biểu đồ | `T15_Thực hành các mô hình học máy có giám sát.ipynb`, ô 46 và 49 | 14 |
+| Biến, danh sách, điều kiện, vòng lặp, hàm | Các PDF lập trình cơ bản, rẽ nhánh, vòng lặp và các notebook Python đã cung cấp | Xuyên suốt |
 
-## Các điều chỉnh phạm vi so với bản trước
+Phần đối chiếu giả thuyết được thực hiện theo mô tả trong `Mid-term-2.pdf`: đối chiếu số liệu với các giả định ban đầu. Các nhận định giới hạn ở mẫu hiện có. Báo cáo không dùng thuật ngữ bác bỏ H0 hoặc có ý nghĩa thống kê để gọi một chênh lệch mô tả.
 
-Không còn phần kiểm định SciPy, hiệu chỉnh nhiều kiểm định, khoảng tin cậy Wilson, cross-validation, Pipeline/ColumnTransformer, DummyClassifier, permutation importance hoặc dữ liệu nén/nhúng trong mã. Không còn lệnh quantile/cut/corr chưa được hướng dẫn. Mã đọc CSV theo cách cơ bản và không cần lệnh giải nén hay kiểm tra mã băm.
-
-Phần giả thuyết chỉ đối chiếu số liệu trong mẫu. Nội dung này chưa thay thế kiểm định thống kê suy luận nếu giảng viên yêu cầu theo nghĩa chặt. Các kết luận không khẳng định quan hệ nhân quả.
-
-Công cụ dùng nội bộ để viết notebook, chạy kiểm tra và dàn trang PDF không được đưa vào phần mã phân tích của bộ nộp.
+Tệp dựng Word/PDF và công cụ đóng gói không được đưa vào mã phân tích của người học. `analysis.py` và notebook là hai biểu diễn của cùng quy trình; dữ liệu trong ô đọc CSV của notebook là nguyên văn tệp gốc.

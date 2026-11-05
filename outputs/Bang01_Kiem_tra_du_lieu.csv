@@ -1,0 +1,9 @@
+bien,kieu_du_lieu,so_o_thieu,nho_nhat,lon_nhat
+age,int64,0,18.0,64.0
+sex,int64,0,0.0,1.0
+bmi,float64,0,15.96,53.13
+children,int64,0,0.0,5.0
+smoker,int64,0,0.0,1.0
+region,int64,0,0.0,3.0
+charges,float64,0,1121.8739,63770.42801
+insuranceclaim,int64,0,0.0,1.0
