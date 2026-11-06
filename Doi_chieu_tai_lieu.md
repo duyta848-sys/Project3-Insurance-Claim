@@ -1,6 +1,6 @@
-# Đối chiếu phương pháp với tài liệu học phần
+﻿# Đối chiếu phương pháp với tài liệu học phần
 
-Chỉ số ô dưới đây bắt đầu từ 0 trong tệp bài giảng; số ô mã của notebook dự án bắt đầu từ 1. Các thao tác đã học được ghép lại để xử lý đúng bộ Insurance.csv.
+Bảng đối chiếu thao tác trong bài với tài liệu học phần.
 
 | Thao tác trong dự án | Tài liệu đã cung cấp | Ô mã dự án |
 |---|---|---|
@@ -20,6 +20,6 @@ Chỉ số ô dưới đây bắt đầu từ 0 trong tệp bài giảng; số �
 | ROC, AUC, so sánh các mô hình trên cùng biểu đồ | `T15_Thực hành các mô hình học máy có giám sát.ipynb`, ô 46 và 49 | 14 |
 | Biến, danh sách, điều kiện, vòng lặp, hàm | Các PDF lập trình cơ bản, rẽ nhánh, vòng lặp và các notebook Python đã cung cấp | Xuyên suốt |
 
-Phần đối chiếu giả thuyết được thực hiện theo mô tả trong `Mid-term-2.pdf`: đối chiếu số liệu với các giả định ban đầu. Các nhận định giới hạn ở mẫu hiện có. Báo cáo không dùng thuật ngữ bác bỏ H0 hoặc có ý nghĩa thống kê để gọi một chênh lệch mô tả.
+Phần đối chiếu giả định làm theo hướng dẫn báo cáo: so sánh số liệu với các giả định ban đầu. Các nhận xét chỉ dựa trên mẫu hiện có.
 
-Tệp dựng Word/PDF và công cụ đóng gói không được đưa vào mã phân tích của người học. `analysis.py` và notebook là hai biểu diễn của cùng quy trình; dữ liệu trong ô đọc CSV của notebook là nguyên văn tệp gốc.
+

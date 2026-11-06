@@ -1,5 +1,5 @@
 # %% 01 Nhập thư viện
-# Nhập các thư viện đã dùng trong tài liệu học phần.
+# Import thư viện
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -13,7 +13,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix
 from sklearn.metrics import roc_curve, roc_auc_score
 
-# Đặt phông có dấu tiếng Việt và màu chữ của hình.
+# Font hỗ trợ tiếng Việt
 plt.rcParams['font.family'] = 'DejaVu Sans'
 plt.rcParams['text.color'] = 'black'
 plt.rcParams['axes.labelcolor'] = 'black'
@@ -22,14 +22,14 @@ plt.rcParams['ytick.color'] = 'black'
 
 
 # %% 02 Đọc dữ liệu gốc
-# Đọc tệp CSV trong cùng thư mục với analysis.py.
+# Đọc Insurance.csv cùng thư mục
 df_goc = pd.read_csv('Insurance.csv')
 print('Kích thước dữ liệu gốc:', df_goc.shape)
 print(df_goc.head().to_string(index=False))
 
 
 # %% 03 Kiểm tra chất lượng dữ liệu
-# Kiểm tra kiểu dữ liệu, số ô thiếu và miền giá trị của từng cột.
+# Kiểm tra kiểu dữ liệu, missing và miền giá trị
 kiem_tra = pd.DataFrame({
     'bien': df_goc.columns,
     'kieu_du_lieu': df_goc.dtypes.astype(str).values,
@@ -40,7 +40,7 @@ kiem_tra = pd.DataFrame({
 kiem_tra.to_csv('Bang01_Kiem_tra_du_lieu.csv', index=False)
 print(kiem_tra.to_string(index=False))
 
-# Lưu cả hai dòng giống nhau làm minh chứng, nhưng chỉ một dòng là lặp vượt bản đầu.
+# Các dòng trùng (giữ cả 2 để xem)
 dong_trung = df_goc[df_goc.duplicated(keep=False)]
 dong_trung.to_csv('Bang02_Dong_trung.csv', index_label='chi_so_dong')
 print('Tổng ô thiếu:', df_goc.isna().sum().sum())
@@ -49,7 +49,7 @@ print(dong_trung.to_string())
 
 
 # %% 04 Ngoại lệ và làm sạch
-# Tính IQR cho biến định lượng; không áp dụng cho mã sex, smoker, region hoặc nhãn.
+# Tính IQR cho biến số (không áp dụng cho biến mã hóa)
 ngoai_le = []
 for cot in ['age', 'bmi', 'children', 'charges']:
     q1 = df_goc[cot].describe()['25%']
@@ -63,7 +63,7 @@ ngoai_le = pd.DataFrame(ngoai_le, columns=['bien', 'Q1', 'Q3', 'IQR', 'nguong_du
 ngoai_le.to_csv('Bang03_Ngoai_le_IQR.csv', index=False)
 print(ngoai_le.to_string(index=False))
 
-# Vẽ bằng chứng ngoại lệ của BMI và chi phí trên dữ liệu gốc.
+# Boxplot BMI và charges
 fig, axes = plt.subplots(1, 2, figsize=(10, 3.4))
 for ax, cot in zip(axes, ['bmi', 'charges']):
     sns.boxplot(x=df_goc[cot], ax=ax, color='#c4dfe2')
@@ -74,8 +74,8 @@ plt.savefig('Hinh01_Ngoai_le.png', dpi=180)
 plt.show()
 plt.close()
 
-# Không điền thiếu vì dữ liệu không có ô thiếu; giữ các giá trị IQR đánh dấu.
-# Bỏ đúng một dòng lặp hoàn toàn, trước khi chia tập huấn luyện và kiểm tra.
+# Không có missing; giữ nguyên điểm IQR đánh dấu
+# Bỏ 1 dòng trùng
 df = df_goc.drop_duplicates().copy()
 df.to_csv('Insurance_clean.csv', index=False)
 print('Kích thước sau xử lý:', df.shape)
@@ -83,7 +83,7 @@ print('Số dòng trùng còn lại:', df.duplicated().sum())
 
 
 # %% 05 Phân bố nhãn và thống kê mô tả
-# Thống kê nhãn và các biến định lượng sau khi bỏ dòng trùng.
+# Thống kê nhãn và biến số sau khi bỏ trùng
 nhan = df['insuranceclaim'].value_counts().sort_index().rename_axis('nhan').reset_index(name='so_ban_ghi')
 nhan['ty_le_phan_tram'] = nhan['so_ban_ghi'] / len(df) * 100
 nhan.to_csv('Bang04_Phan_bo_nhan.csv', index=False)
@@ -92,7 +92,7 @@ mo_ta.to_csv('Bang05_Thong_ke_mo_ta.csv', index_label='bien')
 print(nhan.to_string(index=False))
 print(mo_ta.to_string())
 
-# Vẽ cột phân bố nhãn, ghi rõ cả số lượng và tỷ lệ.
+# Biểu đồ phân bố nhãn
 plt.figure(figsize=(7, 4))
 bars = plt.bar(['Không yêu cầu (0)', 'Có yêu cầu (1)'], nhan['so_ban_ghi'], color=['#377f88', '#d39838'])
 for bar, n, ty_le in zip(bars, nhan['so_ban_ghi'], nhan['ty_le_phan_tram']):
@@ -107,7 +107,7 @@ plt.close()
 
 
 # %% 06 Phân bố biến định lượng
-# Vẽ histogram của bốn biến định lượng, không thay đổi dữ liệu gốc.
+# Histogram 4 biến số
 fig, axes = plt.subplots(2, 2, figsize=(9.5, 6.2))
 for ax, cot in zip(axes.flat, ['age', 'bmi', 'children', 'charges']):
     ax.hist(df[cot], bins=20, color='#377f88', edgecolor='white')
@@ -121,7 +121,7 @@ plt.close()
 
 
 # %% 07 So sánh hút thuốc, tuổi, BMI và người phụ thuộc
-# Phân nhóm theo ngưỡng được xác định trước khi đọc kết quả so sánh.
+# Chia nhóm tuổi và BMI
 df['nhom_tuoi'] = '45-64'
 df.loc[df['age'] <= 29, 'nhom_tuoi'] = '18-29'
 df.loc[(df['age'] >= 30) & (df['age'] <= 44), 'nhom_tuoi'] = '30-44'
@@ -131,7 +131,7 @@ df.loc[(df['bmi'] >= 25) & (df['bmi'] < 30), 'nhom_bmi'] = '25-<30'
 df.loc[(df['bmi'] >= 30) & (df['bmi'] < 35), 'nhom_bmi'] = '30-<35'
 df.loc[(df['bmi'] >= 35) & (df['bmi'] < 40), 'nhom_bmi'] = '35-<40'
 
-# Tóm tắt từng nhóm, luôn đọc tỷ lệ cùng với cỡ mẫu.
+# Groupby theo từng đặc điểm
 nhom = {}
 for cot in ['smoker', 'nhom_tuoi', 'nhom_bmi', 'children', 'sex', 'region']:
     bang = df.groupby(cot, observed=True)['insuranceclaim'].agg(['count', 'sum', 'mean']).reset_index()
@@ -144,7 +144,7 @@ for cot in ['smoker', 'nhom_tuoi', 'nhom_bmi', 'children', 'sex', 'region']:
     print('\nTheo', cot)
     print(bang.to_string(index=False))
 
-# Vẽ tỷ lệ có nhãn 1 theo bốn đặc điểm; không dùng khoảng tin cậy ngoài tài liệu.
+# Biểu đồ tỷ lệ nhãn 1 theo nhóm
 fig, axes = plt.subplots(2, 2, figsize=(10, 6.5))
 for ax, cot in zip(axes.flat, ['smoker', 'nhom_tuoi', 'nhom_bmi', 'children']):
     bang = nhom[cot]
@@ -161,7 +161,7 @@ plt.close()
 
 
 # %% 08 So sánh mã giới tính và vùng cư trú
-# So sánh nhóm sex và region bằng tỷ lệ, không coi mã region là số đo liên tục.
+# So sánh theo sex và region
 fig, axes = plt.subplots(1, 2, figsize=(9.5, 3.8))
 for ax, cot in zip(axes, ['region', 'sex']):
     bang = nhom[cot]
@@ -179,12 +179,12 @@ plt.close()
 
 
 # %% 09 Chi phí y tế và thời điểm thông tin
-# Thống kê charges theo nhãn, giữ nguyên đơn vị gốc của CSV.
+# Thống kê charges theo nhãn
 chi_phi = df.groupby('insuranceclaim')['charges'].agg(['count', 'mean', 'median']).reset_index()
 chi_phi.to_csv('Bang07_Chi_phi_theo_nhan.csv', index=False)
 print(chi_phi.to_string(index=False))
 
-# Vẽ chi phí theo nhãn và quan hệ BMI-chi phí theo nhóm hút thuốc.
+# Boxplot charges và scatter BMI-charges
 fig, axes = plt.subplots(1, 2, figsize=(10, 4))
 sns.boxplot(data=df, x='insuranceclaim', y='charges', color='#c4dfe2', ax=axes[0])
 axes[0].set_title('Chi phí theo nhãn')
@@ -201,7 +201,7 @@ plt.close()
 
 
 # %% 10 Quan sát mối liên hệ và đối chiếu giả định
-# Quan sát đồng thời tuổi, BMI và nhãn, rồi đọc phân bố số người phụ thuộc theo nhãn.
+# Scatter tuổi-BMI và boxplot children theo nhãn
 fig, axes = plt.subplots(1, 2, figsize=(10, 4))
 sns.scatterplot(data=df, x='age', y='bmi', hue='insuranceclaim', alpha=0.4,
                 palette=['#377f88', '#d39838'], ax=axes[0])
@@ -215,25 +215,25 @@ plt.savefig('Hinh07_Moi_lien_he.png', dpi=180)
 plt.show()
 plt.close()
 
-# Đối chiếu giả định bằng số liệu mô tả, không dùng kết luận bác bỏ H0.
-print('Hút thuốc: đọc tỷ lệ nhãn 1 của smoker=0 và smoker=1 trong Bang06_Nhom_smoker.csv.')
-print('Tuổi: so sánh ba nhóm 18-29, 30-44, 45-64; kiểm tra có tăng đều hay không.')
-print('BMI: so sánh tỷ lệ giữa các khoảng BMI và quan sát hai nhãn trên scatter plot.')
-print('Chi phí: đọc trung bình và trung vị theo nhãn trong Bang07_Chi_phi_theo_nhan.csv.')
-print('Các nhận xét chỉ áp dụng cho bộ dữ liệu đang phân tích; chưa phải kiểm định suy luận.')
+# Đối chiếu với giả định ban đầu
+print('Hút thuốc: xem tỷ lệ nhãn 1 theo smoker trong Bang06_Nhom_smoker.csv.')
+print('Tuổi: so sánh tỷ lệ 3 nhóm 18-29, 30-44, 45-64.')
+print('BMI: so sánh tỷ lệ theo khoảng BMI và xem scatter.')
+print('Chi phí: xem trung bình và trung vị theo nhãn trong Bang07_Chi_phi_theo_nhan.csv.')
+print('Nhận xét chỉ áp dụng cho mẫu hiện tại, chưa phải kiểm định suy luận.')
 
 
 # %% 11 Mã hóa và chia tập dữ liệu
-# One-hot mã vùng vì các mã 0, 1, 2, 3 không có khoảng cách định lượng.
+# One-hot region
 X = pd.get_dummies(df[['age', 'bmi', 'children', 'sex', 'smoker', 'region']],
                    columns=['region'], drop_first=True)
 y = df['insuranceclaim']
 
-# Chia phân tầng giống cách thực hành trong tài liệu tuần 15.
+# Train/test split có phân tầng
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,
                                                  random_state=42, stratify=y)
 
-# Chỉ học tham số chuẩn hóa từ train, tránh dùng thông tin của test.
+# Fit scaler trên train, transform test
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
@@ -243,7 +243,7 @@ print('Tỷ lệ nhãn 1 trên test:', y_test.mean())
 
 
 # %% 12 Huấn luyện và so sánh bốn mô hình
-# Khởi tạo đúng bốn mô hình cơ bản và các tham số minh họa của tuần 15.
+# Khởi tạo 4 mô hình
 models = {
     'Logistic Regression': LogisticRegression(random_state=42),
     'KNN': KNeighborsClassifier(n_neighbors=5),
@@ -251,7 +251,7 @@ models = {
     'Random Forest': RandomForestClassifier(n_estimators=10, random_state=42)
 }
 
-# Đánh giá cùng một cách chia để các điểm số có thể so sánh.
+# Đánh giá trên cùng tập test
 ket_qua = []
 du_doan = pd.DataFrame({'chi_so_dong': y_test.index, 'nhan_thuc_te': y_test.values})
 ma_tran = {}
@@ -278,7 +278,7 @@ print('Mốc luôn dự đoán nhãn 1 trên test:', y_test.mean())
 
 
 # %% 13 Ma trận nhầm lẫn
-# Hiển thị đủ bốn ma trận để thấy đánh đổi giữa bỏ sót và dự đoán nhầm.
+# Ma trận nhầm lẫn 4 mô hình
 fig, axes = plt.subplots(2, 2, figsize=(9, 7))
 for ax, (ten, bang) in zip(axes.flat, ma_tran.items()):
     sns.heatmap(bang, annot=True, fmt='d', cmap='Blues', alpha=0.35,
@@ -294,7 +294,7 @@ plt.close()
 
 
 # %% 14 Đường cong ROC và AUC
-# Vẽ ROC trên cùng tập kiểm tra, giữ nguyên mô hình đã huấn luyện.
+# Vẽ ROC trên tập test
 plt.figure(figsize=(7.5, 5))
 for ten, model in models.items():
     proba = model.predict_proba(X_test_scaled)[:, 1]
@@ -313,7 +313,7 @@ plt.close()
 
 
 # %% 15 Tổng hợp phát hiện và kiểm tra đầu ra
-# Tổng hợp các phát hiện chính bằng số liệu vừa tính, không dùng số từ phiên bản cũ.
+# Tổng hợp kết quả
 print('Gốc:', len(df_goc), 'Sau bỏ trùng:', len(df))
 print('Không có nhãn yêu cầu:', (df['insuranceclaim'] == 0).sum())
 print('Có nhãn yêu cầu:', (df['insuranceclaim'] == 1).sum())
@@ -322,7 +322,7 @@ print(nhom['smoker'].to_string(index=False))
 print('Kết quả mô hình:')
 print(ket_qua.to_string(index=False))
 
-# Nêu phạm vi ứng dụng và giới hạn của dữ liệu.
-print('Khuyến nghị: chuẩn hóa thông tin hồ sơ, xác minh nhãn và thời điểm quan sát.')
-print('Chỉ xem mô hình là thử nghiệm hỗ trợ; chưa dùng để tự động quyết định bồi thường hoặc mức phí.')
-print('Các bảng và chín hình đã được lưu trong thư mục làm việc hiện tại.')
+# Ghi chú giới hạn
+print('Cần chuẩn hóa hồ sơ, kiểm tra lại nhãn và thời điểm quan sát trước khi dùng.')
+print('Mô hình chỉ mang tính thử nghiệm, chưa dùng để quyết định bồi thường hay mức phí.')
+print('Các bảng và hình đã lưu trong thư mục làm việc.')
