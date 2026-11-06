@@ -10,7 +10,6 @@ Bài Project 3 – Insurance Claim Dataset (Mid-Term 2, Khoa học dữ liệu).
 |---|---|
 | [Project3_MidTerm2.ipynb](Project3_MidTerm2.ipynb) | Notebook gồm 15 phần mã, có chú thích và diễn giải kết quả. |
 | [Project3_MidTerm2_Report.pdf](Project3_MidTerm2_Report.pdf) | Báo cáo dạng tiểu luận. |
-| [Project3_MidTerm2_Report.docx](Project3_MidTerm2_Report.docx) | Bản Word để bổ sung thông tin trên bìa. |
 | [analysis.py](analysis.py) | Mã phân tích tương đương notebook. |
 | [Insurance.csv](Insurance.csv) | Dữ liệu gốc: 1.338 dòng, 8 cột. |
 | [requirements.txt](requirements.txt) | Danh sách thư viện. |
