@@ -37,4 +37,5 @@ Notebook chứa sẵn CSV gốc trong ô đọc dữ liệu (`StringIO` + `pd.re
 
 Giả định được đối chiếu với thống kê mô tả của mẫu. Bốn mô hình lấy theo bài thực hành tuần 15. Ngoại lệ IQR giữ nguyên vì chưa chắc là lỗi; `charges` không đưa vào mô hình chính vì chưa rõ thời điểm quan sát so với nhãn.
 
-Notebook và `analysis.py` cho kết quả giống nhau. Báo cáo Word và PDF cùng nội dung; bổ sung thông tin còn trống trên bìa trước khi nộp.
+Notebook và `analysis.py` cho kết quả giống nhau. Báo cáo PDF là bản nộp chính thức và đã có thông tin nhóm trên bìa.
+
