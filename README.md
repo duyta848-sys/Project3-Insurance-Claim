@@ -2,14 +2,14 @@
 
 Bài Project 3 – Insurance Claim Dataset (Mid-Term 2, Khoa học dữ liệu).
 
-[Kho GitHub của nhóm](https://github.com/duyta848-sys/Project3-Insurance-Claim) · [Mở trên Colab](https://colab.research.google.com/github/duyta848-sys/Project3-Insurance-Claim/blob/main/Project3_MidTerm2.ipynb) · [Xem báo cáo PDF](Project3_MidTerm2_Report.pdf)
+[Kho GitHub của nhóm](https://github.com/duyta848-sys/Project3-Insurance-Claim) · [Mở trên Colab](https://colab.research.google.com/github/duyta848-sys/Project3-Insurance-Claim/blob/main/Group5_Project3.ipynb) · [Xem báo cáo PDF](Group5_Project3_Report.pdf)
 
 ## Các tệp trong bộ bài
 
 | Tệp hoặc thư mục | Nội dung |
 |---|---|
-| [Project3_MidTerm2.ipynb](Project3_MidTerm2.ipynb) | Notebook gồm 15 phần mã, có chú thích và diễn giải kết quả. |
-| [Project3_MidTerm2_Report.pdf](Project3_MidTerm2_Report.pdf) | Báo cáo dạng tiểu luận. |
+| [Group5_Project3.ipynb](Group5_Project3.ipynb) | Notebook gồm 15 phần mã, có chú thích và diễn giải kết quả. |
+| [Group5_Project3_Report.pdf](Group5_Project3_Report.pdf) | Báo cáo dạng tiểu luận. |
 | [analysis.py](analysis.py) | Mã phân tích tương đương notebook. |
 | [Insurance.csv](Insurance.csv) | Dữ liệu gốc: 1.338 dòng, 8 cột. |
 | [requirements.txt](requirements.txt) | Danh sách thư viện. |
